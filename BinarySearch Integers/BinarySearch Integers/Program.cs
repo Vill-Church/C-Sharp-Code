@@ -11,17 +11,29 @@ namespace BinarySearch_Integers
         static void Main(string[] args)
         {
             int[] arr = new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            int search = Convert.ToInt32(Console.ReadLine());
-            Boolean result = BinarySearch(arr, search, 0, arr.Length - 1);
-            if (result == true)
+            string S = Console.ReadLine();
+            int number;
+            bool canParse = Int32.TryParse(S, out number);
+            if (canParse)
             {
-                Console.WriteLine("Found");
+                int search = number;
+                Boolean result = BinarySearch(arr, search, 0, arr.Length - 1);
+                if (result == true)
+                {
+                    Console.WriteLine("Found");
+                }
+                else
+                {
+                    Console.WriteLine("Not Found");
+                }
+                Console.ReadLine();
             }
             else
             {
-                Console.WriteLine("Not Found");
+                Console.WriteLine("Bad String");
+                Console.Read();
             }
-            Console.ReadLine();
+            
         }
         private static Boolean BinarySearch(int[] arr, int searchFor, int left, int right)
         {
