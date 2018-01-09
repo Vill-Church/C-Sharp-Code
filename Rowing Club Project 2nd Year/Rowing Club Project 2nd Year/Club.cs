@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Rowing_Club_Project_2nd_Year
 {
@@ -27,7 +28,27 @@ namespace Rowing_Club_Project_2nd_Year
         }
         public void SetListOfMembers()
         {
-            ListOfMembers = File.ReadAllLines("test.csv").ToList();
+            Stream membersFile = null;
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Title = "Select Members CSV file";
+            openFile.Filter = "CSV Files|*.csv";
+            openFile.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            if(openFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    if((membersFile = openFile.OpenFile()) != null)
+                    {
+                        ListOfMembers = File.ReadAllLines(openFile.FileName).ToList();
+                    
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Could not read selected file. Error message: "+ ex.Message.ToString());
+                }
+            }
+            
         }
     }
 }
