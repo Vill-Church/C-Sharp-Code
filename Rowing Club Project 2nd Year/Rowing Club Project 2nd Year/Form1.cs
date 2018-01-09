@@ -14,7 +14,6 @@ namespace Rowing_Club_Project_2nd_Year
     public partial class Form1 : Form
     {
         private Club RowingClub = new Club();
-        private int rowSelected;
         public Form1()
         {
             InitializeComponent();
@@ -45,18 +44,15 @@ namespace Rowing_Club_Project_2nd_Year
             MemberAdd addMember = new MemberAdd(); // for testing
             addMember.Show(); // for testing
         }
-        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            // Update list and commit changes
-        }
-        private void dataGridView1_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
-        {
-            // Update list where deleted and commit changes
-        }
         private void SaveCsv(List<String> members)
         {
-
+            File.WriteAllLines(RowingClub.GetFilePath(),members.ToList()); // should work
         }
 
+        private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowSelected = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
+            int colmunChange = Convert.ToInt32(dataGridView1.Rows[e.ColumnIndex].Index);
+        }
     }
 }

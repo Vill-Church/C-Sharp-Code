@@ -13,6 +13,7 @@ namespace Rowing_Club_Project_2nd_Year
         private String ClubName;
         private static List<String> ListOfMembers = new List<String>();
         private String date1 = null;
+        private String filePath =;
         public String GetClubName()
         {
             return ClubName;
@@ -25,6 +26,14 @@ namespace Rowing_Club_Project_2nd_Year
         {
             // add stuff here
             return ListOfMembers;
+        }
+        public void SetFilePath(String path)
+        {
+            this.filePath = path;
+        }
+        public String GetFilePath()
+        {
+            return this.filePath;
         }
         public void SetListOfMembers()
         {
@@ -40,7 +49,7 @@ namespace Rowing_Club_Project_2nd_Year
                     if((membersFile = openFile.OpenFile()) != null)
                     {
                         ListOfMembers = File.ReadAllLines(openFile.FileName).ToList();
-                    
+                        this.SetFilePath(openFile.FileName);
                     }
                 }
                 catch (Exception ex)
