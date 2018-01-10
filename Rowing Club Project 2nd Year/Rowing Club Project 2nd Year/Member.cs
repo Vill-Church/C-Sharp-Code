@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Rowing_Club_Project_2nd_Year
 {
@@ -84,5 +86,65 @@ namespace Rowing_Club_Project_2nd_Year
         {
             this.type = type;
         }
+        public Boolean CheckPhoneNumber(String phoneNumber)
+        {
+            phoneNumber = phoneNumber.Replace("+44", "0"); // replaces +44 for mobile will 0
+            if(phoneNumber.Length>11 && !(phoneNumber.Length == 11))
+            {
+                // length should be 11 digits
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
+        public Boolean CheckEmail(String email)
+        {
+            try
+            {
+                var address = new System.Net.Mail.MailAddress(email);
+                return address.Address == email;
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+        public Boolean CheckForNumbers(String toTest)
+        {
+            Regex numbers = new Regex(".*\\d+.*");
+            if (numbers.IsMatch(toTest))
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
+        public Boolean CheckAge(String ageTest)
+        {
+            try
+            {
+                if (this.CheckForNumbers(ageTest) == true)
+                {
+                    int age = Convert.ToInt32(ageTest);
+                    if(age<=127 && age >= 0)
+                    {
+                        return true;
+                    } else
+                    {
+                        return false;
+                    }
+                } else
+                {
+                    return false;// age should contain a number
+                }
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+        
     }
 }

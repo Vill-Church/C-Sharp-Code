@@ -14,6 +14,7 @@ namespace Rowing_Club_Project_2nd_Year
     public partial class Form1 : Form
     {
         private Club RowingClub = new Club();
+        private String tempValue;
         public Form1()
         {
             InitializeComponent();
@@ -37,6 +38,8 @@ namespace Rowing_Club_Project_2nd_Year
                 dt.Rows.Add(x);
             });
             dataGridView1.DataSource = dt;
+            dataGridView1.ReadOnly = false; // Make data Grid editable
+            dataGridView1.Columns[0].ReadOnly = true; // disable editing of ID Column
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -53,6 +56,17 @@ namespace Rowing_Club_Project_2nd_Year
         {
             int rowSelected = Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[0].Value);
             int colmunChange = Convert.ToInt32(dataGridView1.Rows[e.ColumnIndex].Index);
+            var temp = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            if (tempValue != temp)
+            {
+                //value changed start validation
+
+            } 
+        }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.tempValue = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
         }
     }
 }

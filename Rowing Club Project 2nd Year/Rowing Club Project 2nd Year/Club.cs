@@ -13,7 +13,7 @@ namespace Rowing_Club_Project_2nd_Year
         private String ClubName;
         private static List<String> ListOfMembers = new List<String>();
         private String date1 = null;
-        private String filePath =;
+        private String filePath;
         public String GetClubName()
         {
             return ClubName;
